@@ -1,0 +1,17 @@
+<h4>商品詳細</h4>
+<!--画像-->
+<% if admin.image.attached? %>
+  <%= image_tag admin.image, size: "100×200" %>
+<% else %>
+  <%= image_tag 'no_image', size: "100×200" %>
+<% end %>
+
+<p>商品名</p>
+<p><%= @admin.name</p>
+
+<p>商品説明</p>
+
+<p>税込価格</p>
+<p>（税抜価格）</p>
+<%= @product.add_tax_price.to_s(:delimited) %>円
+<% end %>

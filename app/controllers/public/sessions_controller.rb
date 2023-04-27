@@ -8,6 +8,8 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
+
+
   # POST /resource/sign_in
   # def create
   #   super
@@ -22,9 +24,9 @@ class Public::SessionsController < Devise::SessionsController
 
   def customer_state
     @customer = Customer.find_by(email: params[:customer][:email])
-    return if!@customer
-    if @customer.vaild_password?(params[:customer][:password])
-      if @customer.find_by(is_deleted: true)
+    return if !@customer
+    if @customer.valid_password?(params[:customer][:password])
+      if @customer.where(email: @customer.email, is_deleted: true).exists?
         redirect_to  new_customer_registration_path
       end
     else

@@ -1,0 +1,44 @@
+<h4>商品新規登録</h4>
+
+<%= form_with model: @item, url: admin_items_path do |f| %>
+
+    <p>
+        <%= f.label :image, '商品画像' %>
+        <%= f.file_field :image, accept: "image/*" %>
+    </p>
+
+    <p>
+        <%= f.label :name, '商品名' %>
+        <%= f.text_field :name, placeholder: '商品名' %>
+    </p>
+
+    <p>
+        <%= f.label :introduction, '商品説明' %>
+        <%= f.text_area :introduction, placeholder: 'ここに説明文を記述します' %>
+    </p>
+
+    <p>
+        <%= f.label :genre, 'ジャンル' %>
+        <%= f.collection_select :genre_id, Genre.all, :id, :name %>
+    </p>
+
+    <p>
+        <%= f.label :price, '税抜価格' %>
+        <%= f.text_field :price, placeholder: "1000" %>
+    </p>
+
+    <p>
+        <%= "販売ステータス" %>
+        <%= f.radio_button :is_active, true %>
+        <%= label :is_active, "販売中", value: true %>
+
+        <%= f.radio_button :is_active, false %>
+        <%= label :is_active, "販売停止中", value: false %>
+
+    </p>
+
+    <p>
+        <!--<button type="submit" class="btn btn-primary bg-success">新規登録</button>-->
+        <%= f.submit "新規登録", class:"btn btn-primary bg-success" %>
+    </p>
+<% end %>
