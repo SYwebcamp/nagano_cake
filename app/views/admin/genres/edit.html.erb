@@ -1,7 +1,9 @@
 <h4>ジャンル編集</h4>
 
-  <%= form_with model: @genre, url: admin_genre_path, method: :patch do |f| %>
-  <p><label for="name">ジャンル名</label></p>
-  <%= f.text_field :name, autofocus: true, id:"name" %>
-  <p><button type="submit" class="btn btn-primary bg-success">変更を保存</button></p>
-  <% end %>
+<%= form_with model: @genre, url: admin_genre_path do |f| %>
+
+  <%= f.label :name, "ジャンル名" %>
+  <%= f.text_field :name %>
+
+  <%= f.submit "変更を保存", class:"btn btn-primary bg-success" %>
+<% end %>
