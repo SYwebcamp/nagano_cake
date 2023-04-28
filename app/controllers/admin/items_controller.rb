@@ -7,9 +7,9 @@ class Admin::ItemsController < ApplicationController
     @item = Item.new
   end
 
-  # def show
-  #   @ietm = Item.find(params[:id])
-  # end
+  def show
+    @item = Item.find(params[:id])
+  end
 
   def edit
     @item = Item.find(params[:id])
@@ -25,7 +25,14 @@ class Admin::ItemsController < ApplicationController
   end
 
   def update
-
+    @item = Item.find(params[:id])
+    if @item.update(item_params)
+      flash[:success] = "変更を保存しました。"
+      redirect_to admin_items_path
+    else
+      flash[:danger] = "保存に失敗しました。"
+      render :edit
+    end
   end
 
   private
