@@ -3,6 +3,9 @@
 class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :customer_state, only: [:create]
+  def after_sign_in_path_for(resource)
+    public_items_index_path
+  end
   # GET /resource/sign_in
   # def new
   #   super
@@ -26,7 +29,8 @@ class Public::SessionsController < Devise::SessionsController
     @customer = Customer.find_by(email: params[:customer][:email])
     return if !@customer
     if @customer.valid_password?(params[:customer][:password])
-      if @customer.where(email: @customer.email, is_deleted: true).exists?
+      if @customer.is_deleted
+      # if @customer.where(email: @customer.email, is_deleted: true).exists?
         redirect_to  new_customer_registration_path
       end
     else

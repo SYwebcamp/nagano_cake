@@ -17,7 +17,7 @@
   <div class="field">
     <span>フリガナ</span>
     <%= f.label :first_name_kana, "(セイ)" %>
-    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", :placeholder => "レイワ" %>
+    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", placeholder: "レイワ" %>
   </div>
 
   <div class="field">
@@ -59,15 +59,15 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "新規登録" %>
+    <%= f.submit "新規登録", class:"btn btn-primary bg-success" %>
   </div>
 <% end %>
 
 <div class="login_path">
   <h5>既に登録済みの方</h5>
   <p>
-    <%= render partial: "public/shared/links", locals: { link_url: "new_customer_session_path" } %>
-    からログインしてください。
+    <%= link_to "こちら", new_customer_session_path %>
+    <span>からログインしてください。</span>
   </p>
 
 </div>

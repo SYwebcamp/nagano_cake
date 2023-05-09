@@ -1,2 +1,36 @@
-<h1>Public::Items#index</h1>
-<p>Find me in app/views/public/items/index.html.erb</p>
+<table>
+    <h5>ジャンル一覧</h5>
+    <% @genres.each do |genre| %>
+    <thead>
+        <tr></tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <%= link_to genre.name, public_items_path(genre_id: genre.id), class: "text-secondary" %>
+            </td>
+        </tr>
+    </tbody>
+    <% end %>
+</table>
+<!--ジャンル別商品一覧-->
+<% if @genre_id == presence %>
+    <h2>
+        <%= @genre.name %>一覧
+    </h2>
+<% end %>
+
+<h2>商品一覧</h2>
+
+<% @items.each do |item| %>
+    <div>
+        <% if item.image.attached? %>
+            <%= image_tag item.image.variant( resize: "200" ).processed %>
+        <% else %>
+          <%= image_tag 'no_image', size: "100x200" %>
+        <% end %>
+        <%= link_to item.name, public_item_path(item.id) %>
+        <p><%= item.name %></p>
+        <p><%= item.price %></p>
+    </div>
+<% end %>

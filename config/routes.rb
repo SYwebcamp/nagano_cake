@@ -9,38 +9,35 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    get 'addresses/index'
-    get 'addresses/edit'
+    resources :addresses, only: [:index, :show]
   end
   namespace :public do
-    get 'orders/new'
-    get 'orders/finish'
-    get 'orders/index'
-    get 'orders/show'
+    resources :orders, only: [:new, :finish, :index, :show]
   end
   namespace :public do
-    get 'cart_items/index'
+    resources :cart_items, only: [:index, :update, :destroy, :create]do
+      collection do 
+        delete :all_destroy
+      end
+      
+    end
   end
   namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-    get 'customers/check'
+    get 'customers/mypage', to: 'customers#show'
+    get 'customers/information/edit', to: 'customers#edit'
+    # resources :customers, [:show, :edit, :check]
   end
   namespace :public do
-    get 'items/index'
-    get 'items/show'
+    resources :items, only: [:index, :show]
   end
   namespace :public do
-    get 'homes/top'
-    get 'homes/about'
+    resources :homes, only: [:top, :about]
   end
   namespace :admin do
-    get 'orders/show'
+    resources :orders, only: [:show]
   end
   namespace :admin do
-    get 'customers/index'
-    get 'customers/show'
-    get 'customers/edit'
+    resources :customers, only: [:index, :show, :edit]
   end
   namespace :admin do
     resources :genres, only: [:index, :create, :update, :post, :edit]
@@ -49,7 +46,7 @@ Rails.application.routes.draw do
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
   end
   namespace :admin do
-    get 'homes/top'
+    resources :homes, only: [:top]
   end
 
 
