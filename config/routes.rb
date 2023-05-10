@@ -9,17 +9,17 @@ Rails.application.routes.draw do
   }
 
   namespace :public do
-    resources :addresses, only: [:index, :show]
+    resources :addresses, only: [:index, :destroy, :edit, :create, :update]
   end
   namespace :public do
     resources :orders, only: [:new, :finish, :index, :show]
   end
   namespace :public do
     resources :cart_items, only: [:index, :update, :destroy, :create]do
-      collection do 
+      collection do
         delete :all_destroy
       end
-      
+
     end
   end
   namespace :public do
@@ -34,7 +34,12 @@ Rails.application.routes.draw do
     resources :homes, only: [:top, :about]
   end
   namespace :admin do
-    resources :orders, only: [:show]
+    resources :orders, only: [:show, :new, :index, :create] do
+      collection do
+        post :check
+        get :finish
+      end
+    end
   end
   namespace :admin do
     resources :customers, only: [:index, :show, :edit]
