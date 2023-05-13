@@ -1,13 +1,40 @@
 <h3>注文情報入力</h3>
 
-<%= form_with model: @order, url: check_admin_orders_path do |f| %>
+<%= form_with model: @order, url: check_orders_path do |f| %>
     <h4>支払方法</h4>
-    <%= f.radio_button :payment_method, 0 %>
-    <%= label :payment_method, "クレジットカード", value: 0 %>
+    <%= f.radio_button :payment_method, :credit_card %>
+    <%= label :payment_method, "クレジットカード", value: :credit_card %>
 
-    <%= f.radio_button :payment_method, 1 %>
-    <%= label :payment_method, "銀行振込", value: 1 %>
-    
+    <%= f.radio_button :payment_method, :transfer %>
+    <%= label :payment_method, "銀行振込", value: :transfer %>
+
     <h4>お届け先</h4>
-    <%= f.radio_button :
+    <p>
+        <%= f.radio_button :select_address, 0 %>
+        <%= f.label :shipping_address, "ご自身の住所", value: :address %>
+        <%= current_customer.address %>
+    <p>
+        <%= f.radio_button :select_address, 1 %>
+        <%= f.label :登録済住所から選択 %>
+        <%= f.select :address_id, options_from_collection_for_select(Address.all, :id, :address_display) %>
+    </p>
+    <p>
+        <%= f.radio_button :select_address, 2 %>
+        新しいお届け先
+    </p>
+    <p>
+        <%= f.label :shipping_postal_code, "郵便番号" %>
+        <%= f.text_field :shipping_postal_code, placeholder: '0000000' %>
+    </p>
+    <p>
+        <%= f.label :shipping_adderss, "住所" %>
+        <%= f.text_field :shipping_address, placeholder: "東京都渋谷区代々木神園町0-0" %>
+    </p>
+
+    <p>
+        <%= f.label :shipping_name, "宛名" %>
+        <%= f.text_field :shipping_name, placeholder: "令和道子" %>
+    </p>
+
+    <%= f.submit "確認画面へ進む", class:"btn btn-primary" %>
 <% end %>

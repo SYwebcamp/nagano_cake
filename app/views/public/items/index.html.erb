@@ -7,7 +7,7 @@
     <tbody>
         <tr>
             <td>
-                <%= link_to genre.name, public_items_path(genre_id: genre.id), class: "text-secondary" %>
+                <%= link_to genre.name, items_path(genre_id: genre.id), class: "text-secondary" %>
             </td>
         </tr>
     </tbody>
@@ -29,7 +29,7 @@
         <% else %>
           <%= image_tag 'no_image', size: "100x200" %>
         <% end %>
-        <%= link_to item.name, public_item_path(item.id) %>
+        <%= link_to item.name, item_path(item.id) %>
         <p><%= item.name %></p>
         <p><%= item.price %></p>
     </div>

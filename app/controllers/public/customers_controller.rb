@@ -8,14 +8,14 @@ class Public::CustomersController < ApplicationController
   end
 
   def check
-    
+
   end
 
   def update
-    @customer = Customer.find(customer_params)
+    @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
       flash[:success] = "会員情報を変更しました。"
-      redirect_to public_customers_mypage
+      redirect_to customers_mypage_path
     else
       flash[:danger] = "変更に失敗しました。"
       render :edit

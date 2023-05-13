@@ -11,7 +11,7 @@ class Public::AddressesController < ApplicationController
     @address = Address.new(address_params)
     if @address.save
       flash[:succsess] = "配送先を登録しました。"
-      redirect_to public_addresses_path
+      redirect_to addresses_path
     else
       flash[:danger] = "配送先の登録に失敗しました。"
       render :index
@@ -20,7 +20,7 @@ class Public::AddressesController < ApplicationController
   def update
     @address = Address.find(params[:id])
     if @address.update(address_params)
-      redirect_to public_addresses_path
+      redirect_to addresses_path
     else
       flash[:danger] = "変更に失敗しました。"
       render :edit
@@ -29,7 +29,7 @@ class Public::AddressesController < ApplicationController
   def destroy
     address = Address.find(params[:id])
     address.destroy
-    redirect_to public_addresses_path
+    redirect_to addresses_path
   end
 
   private

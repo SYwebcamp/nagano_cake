@@ -8,32 +8,34 @@ Rails.application.routes.draw do
     sessions: 'public/sessions'
   }
 
-  namespace :public do
+  scope module: :public do
     resources :addresses, only: [:index, :destroy, :edit, :create, :update]
-  end
-  namespace :public do
+
     resources :orders, only: [:new, :finish, :index, :show]
-  end
-  namespace :public do
+
     resources :cart_items, only: [:index, :update, :destroy, :create]do
       collection do
         delete :all_destroy
       end
 
     end
-  end
-  namespace :public do
+
+    resources :customers, only: [:update, :edit, :show]do
+      collection do
+        get :check
+        patch :withdrawl
+      end
+    end
     get 'customers/mypage', to: 'customers#show'
     get 'customers/information/edit', to: 'customers#edit'
-    # resources :customers, [:show, :edit, :check]
-  end
-  namespace :public do
+
+
     resources :items, only: [:index, :show]
-  end
-  namespace :public do
+
+
     resources :homes, only: [:top, :about]
-  end
-  namespace :admin do
+
+
     resources :orders, only: [:show, :new, :index, :create] do
       collection do
         post :check
@@ -41,16 +43,17 @@ Rails.application.routes.draw do
       end
     end
   end
+
   namespace :admin do
     resources :customers, only: [:index, :show, :edit]
-  end
-  namespace :admin do
+
+
     resources :genres, only: [:index, :create, :update, :post, :edit]
-  end
-  namespace :admin do
+
+
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
-  end
-  namespace :admin do
+
+
     resources :homes, only: [:top]
   end
 

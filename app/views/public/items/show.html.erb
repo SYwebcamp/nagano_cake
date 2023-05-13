@@ -7,14 +7,14 @@
   <tbody>
     <tr>
       <td>
-        <%= link_to genre.name, public_items_path(genre.id) %>
+        <%= link_to genre.name, items_path(genre.id) %>
       </td>
     </tr>
   </tbody>
   <% end %>
 </table>
 
-<%= form_with model: @cart_item, url: public_cart_items_path do |f| %>
+<%= form_with model: @cart_item, url: cart_items_path do |f| %>
   <% if @item.image.attached?%>
     <%= image_tag @item.image.variant( resize: "200" ).processed %>
   <% else %>
