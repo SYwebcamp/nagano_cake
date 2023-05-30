@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :addresses, only: [:index, :destroy, :edit, :create, :update]
 
-    resources :orders, only: [:new, :finish, :index, :show]
 
     resources :cart_items, only: [:index, :update, :destroy, :create]do
       collection do
@@ -45,16 +44,21 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :customers, only: [:index, :show, :edit]
+    resources :customers, only: [:index, :show, :edit, :update]
 
 
-    resources :genres, only: [:index, :create, :update, :post, :edit]
+    resources :genres, only: [:index, :create, :update, :update, :edit]
 
 
     resources :items, only: [:new, :create, :index, :show, :edit, :update]
 
 
     resources :homes, only: [:top]
+
+    resources :orders, only: [:show, :update]
+
+    resources :order_details, only: [:update]
+
   end
 
 
