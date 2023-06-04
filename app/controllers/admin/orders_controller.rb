@@ -1,5 +1,6 @@
 class Admin::OrdersController < ApplicationController
   def show
+    @order = Order.find(params[:id])
   end
   def update
     @order = Order.find(params[:id])
@@ -8,6 +9,9 @@ class Admin::OrdersController < ApplicationController
       @order_details.update.all(production_status: 1) if @order.status == "payment_confirmation"
     end
     redirect_to  admin_order_path(@order)
+  end
+  def index
+    @orders = Order.all
   end
 
   private

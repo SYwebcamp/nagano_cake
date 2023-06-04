@@ -47,6 +47,10 @@ ja:
         production_not_possible: "着手不可"
         production_pending: "製作待ち"
         in_production_complete: "製作完了"
+    customer:
+      is_deleted:
+        false: "有効"
+        true: "退会"
   activerecord:
     errors:
       messages:
