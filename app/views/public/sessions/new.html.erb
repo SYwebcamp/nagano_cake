@@ -1,0 +1,46 @@
+<div class="container fluid">
+  <div class="row">
+    <h2 class="m-3 col-12">ログイン</h2>
+    <div>
+      <%= flash[:alert] %>
+    </div>
+  </div>
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row m-3">
+      <div class="col-md-2">
+        <%= f.label :email, "メールアドレス", class:"col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "sample@example.com", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-2">
+        <%= f.label :password, "パスワード", class:"col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+      </div>
+    </div>
+
+
+    <div class="row m-3">
+      <div class="col-md-2"></div>
+      <div class="col-md-4">
+        <%= f.submit "ログイン", class:"btn btn-primary" %>
+      </div>
+
+    </div>
+  <% end %>
+  <div class="row">
+    <h5 class="col-12 my-3">会員登録がお済みでない方</h5>
+      <div class="col-md-2"></div>
+      <div class="col-md-8 lead">
+        <p>
+          <%= link_to "こちら", new_customer_registration_path %>
+          <span>から新規登録を行ってください。</span>
+        </p>
+      </div>
+  </div>
+</div>

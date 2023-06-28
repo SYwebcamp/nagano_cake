@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="row my-3">
+    <div class="col-10 offset-1">
+      <h4>注文履歴詳細</h4>
+    </div>
+  </div>
+
+  <div class="row my-3">
+    <div class="col-2 offset-1">
+      <p class="font-weight-bold">購入者</p>
+    </div>
+    <div class="col-9">
+      <%= @order.customer.full_name %>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-2 offset-1">
+      <p class="font-weight-bold">注文日</p>
+    </div>
+    <div class="col-9">
+      <%= l @order.created_at, format: :short %>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col-2 offset-1">
+      <p class="font-weight-bold">配送先</p>
+    </div>
+    <div class="col-9">
+      <%= @order.shipping_address_display %><br>
+      <%= @order.shipping_name %>
+    </div>
+  </div>
+
+  <div class="row my-3">
+    <div class="col-2 offset-1">
+      <p class="font-weight-bold">支払方法</p>
+    </div>
+    <div class="col-9">
+      <%= @order.payment_method_i18n %>
+    </div>
+  </div>
+
+  <div class="row my-3">
+    <div class="col-2 offset-1">
+      <p class="font-weight-bold">注文ステータス</p>
+    </div>
+    <div class="col-9">
+      <%= form_with model: @order, url: admin_order_path do |f| %>
+        <%= f.select :status, Order.statuses_i18n.invert, class:"form-select form-select-lg" %>
+        <%= f.submit "更新", class:"btn btn-success mx-4" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-8">
+      <table class="table border-bottom">
+        <thead>
+          <tr>
+            <th>商品名</th>
+            <th>単価(税込)</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>製作ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+            <tr>
+              <td><%= order_detail.item.name %></td>
+              <td><%= order_detail.tax_included %></td>
+              <td><%= order_detail.product_quantity %></td>
+              <td><%= order_detail.subtotal %></td>
+              <td>
+                <%= form_with model: order_detail, url: admin_order_detail_path do |f| %>
+                  <%= f.select :production_status, OrderDetail.production_statuses_i18n.invert, class:"form-select form-select-lg" %>
+                  <%= f.hidden_field :order_id, :value => order_detial.order_id %>
+                  <%= f.submit "更新", class:"btn btn-success" %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+
+    </div>
+  </div>
+
+</div>

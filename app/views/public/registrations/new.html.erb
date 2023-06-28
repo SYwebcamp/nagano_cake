@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div class="row">
+    <h2 class="m-3 col-12">新規会員登録</h2>
+  </div>
+
+  <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+    <div class="row align-items-center m-3">
+      <span class="col-md-1">名前</span>
+      <div class="col-md-1">
+        <span><%= f.label :first_name, "(姓)", class:"col-form-label" %></span>
+      </div>
+      <div class="col-md-4">
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", :placeholder => "令和", class:"form-control" %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :last_name, "(名)", class:"col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", :placeholder => "道子", class:"form-control"  %>
+      </div>
+    </div>
+
+
+    <div class="row align-items-center m-3">
+      <span class="col-md-1">フリガナ</span>
+      <div class="col-md-1">
+        <%= f.label :first_name_kana, "(セイ)", class:"col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", :placeholder => "レイワ", class:"form-control" %>
+      </div>
+      <div class="col-md-1">
+        <%= f.label :last_name_kana, "(メイ)", class:"col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", :placeholder => "ミチコ", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-2">
+        <%= f.label :email, "メールアドレス", class: "col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", :placeholder => "sample@example.com", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-1">
+        <%= f.label :postal_code, "郵便番号", class: "col-md-2", class:"col-form-label" %>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", :placeholder => "0000000", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-1">
+        <%= f.label :address, "住所", class: "co-form-label" %>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <%= f.text_area :address, autofocus: true, autocomplete: "address", :placeholder => "東京都渋谷区代々木神園町0-0", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-1">
+        <%= f.label :telephone_number, "電話番号", class:"col-form-label" %>
+      </div>
+      <div class="col-md-1"></div>
+      <div class="col-md-4">
+        <%= f.telephone_field :telephone_number, autofocus: true, autocomplete: "telephone_number", :placeholder => "00000000000", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-2">
+        <%= f.label :password, "パスワード(６文字以上)", class:"col-form-label" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-2">
+        <%= f.label :password_confirmation, "パスワード(確認用)", class:"col-form-control" %>
+      </div>
+      <div class="col-md-4">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row m-3">
+      <div class="col-md-1"></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-3">
+        <%= f.submit "新規登録", class:"btn btn-primary bg-success form-control" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+  <h2 class="col-12 m-3">既に登録済みの方</h2>
+    <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <p class="lead">
+        <%= link_to "こちら", new_customer_session_path %>
+        <span>からログインしてください。</span>
+      </p>
+    </div>
+  </div>
+</div>
+

@@ -5,12 +5,59 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/4304fe7088.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+<<<<<<< HEAD
+=======
+    <div class="container-fluid">
+    <header class="w-100">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
+      <% if customer_signed_in? %>
+      <div class="col-8"><h1>LOGO</h1></div>
+      <div class="col-4">
+        <ul class="navbar d-flex justify-content-around">
+          <%= link_to "マイページ", customers_mypage_path, class:"btn btn-outline-secondary" %>
+          <%= link_to "商品一覧", items_path, class:"btn btn-outline-secondary" %>
+          <%= link_to "カート", cart_items_path, class:"btn btn-outline-secondary" %>
+          <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+        </ul>
+      </div>
+
+      <% elsif admin_signed_in? %>
+        <div class="col-lg-6"><h1>LOGO</h1></div>
+        <div class="col-lg-6">
+          <ul class="navbaar d-flex justify-content-around">
+            <%= link_to "商品一覧", admin_items_path, class:"btn btn-outline-secondary" %>
+            <%= link_to "会員一覧", admin_customers_path, class:" btn btn-outline-secondary" %>
+            <%= link_to "注文履歴一覧", admin_orders_path, class:"btn btn-outline-secondary" %>
+            <%= link_to "ジャンル一覧", admin_genres_path, class:"btn btn-outline-secondary" %>
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-outline-secondary" %>
+          </ul>
+        </div>
+      <% else %>
+        <div class="col-lg-8"><h1>LOGO</h1></div>
+        <div class="col-lg-4">
+          <ul class="navbar d-flex justify-content-around">
+            <%= link_to "About", about_homes_path, class:"btn btn-outline-secondary" %>
+            <%= link_to "商品一覧", items_path, class:"btn btn-outline-secondary" %>
+            <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-outline-secondary" %>
+            <%= link_to "ログイン", new_customer_session_path, class:"btn btn-outline-secondary" %>
+          </ul>
+        </div>
+      <% end %>
+      </nav>
+      <%= flash[:notice] %>
+    </header>
+    </div>
+>>>>>>> ab97790 (Finish)
     <%= yield %>
+
   </body>
+  <footer>
+
+  </footer>
 </html>

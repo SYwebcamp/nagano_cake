@@ -80,6 +80,8 @@ GEM
     crass (1.0.6)
     date (3.3.3)
     erubi (1.12.0)
+    exnum (0.3.0)
+      activerecord
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -88,6 +90,18 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     listen (3.8.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -222,7 +236,12 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  devise
+  enum_help
+  exnum
+  image_processing (~> 1.2)
   jbuilder (~> 2.7)
+  kaminari (~> 1.2.1)
   listen (~> 3.3)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
