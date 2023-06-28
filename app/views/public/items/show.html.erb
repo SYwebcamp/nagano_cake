@@ -1,32 +1,31 @@
-<table>
-  <h5>ジャンル一覧</h5>
-  <% @genres.each do |genre| %>
-  <thead>
-    <tr></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <%= link_to genre.name, items_path(genre.id) %>
-      </td>
-    </tr>
-  </tbody>
-  <% end %>
-</table>
+<div class="container-fluid m-5">
+  <div class="row mt-3">
+    <div class="col-2 text-center">
+      <div class="border border-5">
+        <h5 class="border border-3 p-1 font-weight-bold">ジャンル検索</h5>
+        <% @genres.each do |genre| %>
+          <%= link_to genre.name, items_path(genre_id: genre.id), class:"d-block", style:"line-height:2rem" %>
+        <% end %>
+      </div>
+    </div>
 
-<%= form_with model: @cart_item, url: cart_items_path do |f| %>
-  <% if @item.image.attached?%>
-    <%= image_tag @item.image.variant( resize: "200" ).processed %>
-  <% else %>
-    <%= image_tag 'no_image', size: "100x200" %>
-  <% end %>
-
-  <%= @item.name %>
-  <%= @item.introduction %>
-  <%= @item.add_tax_price.to_s(:dalimited) %>
-  <span>(税込価格)</span>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.hidden_field :customer_id, :value => current_customer.id %>
-  <%= f.select :amount, *[1..9] %>
-  <%= f.submit "カートに入れる", class:"btn btn-success" %>
-<% end %>
+    <div class="col-4">
+      <% if @item.image.attached?%>
+        <%= image_tag @item.image.variant( resize: "400" ).processed %>
+      <% else %>
+        <%= image_tag 'no_image', size: "100x200" %>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <h2 class="font-weight-bold"><%= @item.name %></h2>
+      <p class="py-3"><%= @item.introduction %></p>
+      <h5 class="py-3">¥<%= @item.add_tax_price.to_s(:dalimited) %><span>(税込)</span></h5>
+      <%= form_with model: @cart_item, url: cart_items_path do |f| %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.hidden_field :customer_id, :value => current_customer.id %>
+        <%= f.select :amount, *[1..9], :prompt => "個数選択" %>
+        <%= f.submit "カートに入れる", class:"btn btn-success ml-5" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -73,9 +73,9 @@
               <td><%= order_detail.product_quantity %></td>
               <td><%= order_detail.subtotal %></td>
               <td>
-                <%= form_with model: order_detail, url: admin_order_detail_path(order_detail) do |f| %>
+                <%= form_with model: order_detail, url: admin_order_detail_path do |f| %>
                   <%= f.select :production_status, OrderDetail.production_statuses_i18n.invert, class:"form-select form-select-lg" %>
-                  <%= f.hidden_field :order_id, :value => order_detail.order_id %>
+                  <%= f.hidden_field :order_id, :value => order_detial.order_id %>
                   <%= f.submit "更新", class:"btn btn-success" %>
                 <% end %>
               </td>
@@ -84,21 +84,8 @@
         </tbody>
       </table>
     </div>
-    <div class="col-4 align-self-end">
-      <table>
-      <tr>
-        <th class="px-3">商品合計</th>
-        <td><%= @order.amount_paid %>円</td>
-      </tr>
-      <tr>
-        <th class="px-3">送料</th>
-        <td><%= @order.postage %>円</td>
-      </tr>
-      <tr>
-        <th class="px-3">請求金額合計</th>
-        <td class="bold"><%= @order.product_total %>円</td>
-      </tr>
-      </table>
+    <div class="col-4">
+
     </div>
   </div>
 

@@ -12,4 +12,5 @@ class Order < ApplicationRecord
   def shipping_address_display
     "〒" + shipping_postal_code + shipping_address
   end
+
 end

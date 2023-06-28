@@ -1,7 +1,8 @@
 class Public::OrdersController < ApplicationController
   def new
-    @addresses = Address.all
+    @addresses = current_customer.addresses.all
     @order = Order.new
+    @address_new = Address.new
   end
 
   def finish
@@ -9,30 +10,31 @@ class Public::OrdersController < ApplicationController
 
 
   def check
+    @addresses = current_customer.addresses.all
     @order = Order.new(order_params)
     if params[:order][:select_address] == "0"
-      @order.shipping_name = current_customer.last_name + current_customer.first_name
+      @order.shipping_name = current_customer.first_name + current_customer.last_name
       @order.shipping_address = current_customer.address
       @order.shipping_postal_code = current_customer.postal_code
     elsif params[:order][:select_address] == "1"
+      @address_new = current_customer.addresses.new(address_params)
       if Address.exists?(id: params[:order][:address_id])
         @order.shipping_name = Address.find(params[:order][:address_id]).name
         @order.shipping_address = Address.find(params[:order][:address_id]).address
         @order.shipping_postal_code = Address.find(params[:order][:address_id]).postal_code
-
       else
+        flash[:notice] = "エラーが発生しました"
         render :new
       end
     elsif params[:order][:select_address] == "2"
-      address_new = current_customer.addresses.new(address_params)
-      if address_new.save
-        @order.shipping_name = address_new.name
-        @order.shipping_postal_code = address_new.postal_code
-        @order.shipping_address = address_new.address
+      @address_new = current_customer.addresses.new(address_params)
+      if @address_new.save
+        @order.shipping_name = @address_new.name
+        @order.shipping_postal_code = @address_new.postal_code
+        @order.shipping_address = @address_new.address
       else
         render :new
       end
-
     end
     @cart_items = current_customer.cart_items.all
     @total = @cart_items.inject(0) { |total, cart_item| total + cart_item.subtotal }
@@ -60,6 +62,7 @@ class Public::OrdersController < ApplicationController
 
   def index
     @cart_items = CartItem.all
+    @orders = current_customer.orders.all
     @order_details = OrderDetail.all
   end
 

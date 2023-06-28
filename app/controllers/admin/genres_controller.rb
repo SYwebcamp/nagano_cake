@@ -8,7 +8,7 @@ class Admin::GenresController < ApplicationController
     @genre = Genre.new(genres_params)
     if @genre.save
       flash[:success] = "登録に成功しました"
-      redirect_to admin_genres_path(@genre)
+      redirect_to admin_genre_path(@genre)
     else
       @genres = Genre.all
       render :index

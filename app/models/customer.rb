@@ -8,9 +8,17 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   def address_display
-    '〒' + postal_code + "" + address + "" + last_name + first_name
+    '〒' + postal_code + "" + address + "" + first_name + last_name
   end
   def full_name
     first_name + last_name
   end
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :first_name_kana, presence: true
+  validates :last_name_kana, presence: true
+  validates :postal_code, presence: true
+  validates :address, presence: true
+  validates :telephone_number, presence: true
+  validates :email, presence: true
 end

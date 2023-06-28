@@ -1,7 +1,7 @@
 class Public::AddressesController < ApplicationController
   def index
     @address = Address.new
-    @addresses = Address.all
+    @addresses = current_customer.addresses.all
   end
 
   def edit
@@ -14,6 +14,7 @@ class Public::AddressesController < ApplicationController
       redirect_to addresses_path
     else
       flash[:danger] = "配送先の登録に失敗しました。"
+      @addresses = current_customer.addresses.all
       render :index
     end
   end

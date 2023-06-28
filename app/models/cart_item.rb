@@ -9,4 +9,6 @@ class CartItem < ApplicationRecord
   def already
      current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
   end
+  validates :amount, presence: true
+
 end

@@ -60,3 +60,7 @@ gem 'devise'
 gem 'enum_help'
 
 gem 'pry-byebug', group: :development
+
+gem 'kaminari','~> 1.2.1'
+
+gem 'exnum'

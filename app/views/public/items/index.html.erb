@@ -1,36 +1,39 @@
-<table>
-    <h5>ジャンル一覧</h5>
-    <% @genres.each do |genre| %>
-    <thead>
-        <tr></tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <%= link_to genre.name, items_path(genre_id: genre.id), class: "text-secondary" %>
-            </td>
-        </tr>
-    </tbody>
-    <% end %>
-</table>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-2 text-center">
+            <div class="border border-5">
+                <h5 class="border border-3 p-1 font-weight-bold">ジャンル検索</h5>
+                <% @genres.each do |genre| %>
+                  <%= link_to genre.name, items_path(genre_id: genre.id), class:"d-block", style:"line-height:2rem" %>
+                <% end %>
+            </div>
+        </div>
+
 <!--ジャンル別商品一覧-->
-<% if @genre_id == presence %>
-    <h2>
-        <%= @genre.name %>一覧
-    </h2>
-<% end %>
-
-<h2>商品一覧</h2>
-
-<% @items.each do |item| %>
-    <div>
-        <% if item.image.attached? %>
-            <%= image_tag item.image.variant( resize: "200" ).processed %>
-        <% else %>
-          <%= image_tag 'no_image', size: "100x200" %>
-        <% end %>
-        <%= link_to item.name, item_path(item.id) %>
-        <p><%= item.name %></p>
-        <p><%= item.price %></p>
+        <div class="col-10">
+            <div style="width: 100%;">
+                <% if @genre.present? %>
+                    <h2><%= @genre.name %>一覧</h2>
+                <% else %>
+                <h2>商品一覧</h2>
+                <% end %>
+            </div>
+            <div class="row">
+                <% @items.each do |item| %>
+                    <%= link_to item_path(item) do %>
+                        <div class="card col-3">
+                            <% if item.image.attached? %>
+                                <%= image_tag item.image, class:"card-img-top", style:"width: 100%; height: 200px;" %>
+                            <% else %>
+                              <%= image_tag 'no_image', size: "100x200" %>
+                            <% end %>
+                    <% end %>
+                        <p><%= link_to item.name, item_path(item.id) %></p>
+                        <p><%= item.price %></p>
+                    </div>
+                <% end %>
+            </div>
+            <%= paginate @items %>
+        </div>
     </div>
-<% end %>
+</div>

@@ -1,43 +1,81 @@
-<h4>商品新規登録</h4>
+<div class="container">
+    <div class="row my-3">
+        <div class="col-12">
+            <h4>商品新規登録</h4>
+            <% if @item.errors.any? %>
+                <%= @item.errors.count %>件のエラーが発生しました
+                <ul>
+                    <% @item.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                </ul>
+            <% end %>
+        </div>
+    </div>
 
-<%= form_with model: @item, url: admin_items_path do |f| %>
-    <p>
-        <%= f.label :image, '商品画像' %>
-        <%= f.file_field :image, accept: "image/*" %>
-    </p>
+    <%= form_with model: @item, url: admin_items_path do |f| %>
+        <div class="row my-3">
+            <div class="col-md-2 offset-2">
+                <%= f.label :image, '商品画像', class:"col-form-label" %>
+            </div>
+            <div class="col-md-5">
+                <%= f.file_field :image, accept: "image/*", class:"form-control-file" %>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-md-2 offset-2">
+                <%= f.label :name, '商品名', class:"col-form-label" %>
+            </div>
+            <div class="col-md-4">
+                <%= f.text_field :name, placeholder: '商品名', class:"form-control" %>
+            </div>
+        </div>
 
-    <p>
-        <%= f.label :name, '商品名' %>
-        <%= f.text_field :name, placeholder: '商品名' %>
-    </p>
+        <div class="row my-3">
+            <div class="col-md-2 offset-2">
+                <%= f.label :introduction, '商品説明', class:"col-form-label" %>
+            </div>
+            <div class="col-md-5">
+                <%= f.text_area :introduction, placeholder: 'ここに説明文を記述します', class:"form-control" %>
+            </div>
+        </div>
 
-    <p>
-        <%= f.label :introduction, '商品説明' %>
-        <%= f.text_area :introduction, placeholder: 'ここに説明文を記述します' %>
-    </p>
+        <div class="row my-3">
+            <div class="col-md-2 offset-2">
+                <%= f.label :genre, 'ジャンル', class:"col-form-label" %>
+            </div>
+            <div class="col-md-5">
+                <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--", class:"form-select" %>
+            </div>
+        </div>
 
-    <p>
-        <%= f.label :genre, 'ジャンル' %>
-        <%= f.collection_select :genre_id, Genre.all, :id, :name %>
-    </p>
+        <div class="row my-3">
+            <div class="col-md-2 offset-2">
+                <%= f.label :price, '税抜価格', class:"col-form-label" %>
+            </div>
+            <div class="col-md-5">
+                <%= f.text_field :price, placeholder: "1000", class:"form-control" %>
+            </div>
+        </div>
 
-    <p>
-        <%= f.label :price, '税抜価格' %>
-        <%= f.text_field :price, placeholder: "1000" %>
-    </p>
+        <div class="row my-3">
+            <div class="col-md-2 offset-2">
+                <%= "販売ステータス" %>
+            </div>
+            <div class="col-md-1">
+                <%= f.radio_button :is_active, true, class:"form-check-input", id:"radio1" %>
+                <%= label :is_active, "販売中", value: true, class:"form-check-label", for:"radio1" %>
+            </div>
+            <div class="col-md-2">
+                <%= f.radio_button :is_active, false, class:"form-check-input", id:"radio2" %>
+                <%= label :is_active, "販売停止中", value: false, for:"radio2" %>
+            </div>
+        </div>
 
-    <p>
-        <%= "販売ステータス" %>
-        <%= f.radio_button :is_active, true %>
-        <%= label :is_active, "販売中", value: true %>
-
-        <%= f.radio_button :is_active, false %>
-        <%= label :is_active, "販売停止中", value: false %>
-
-    </p>
-
-    <p>
-        <!--<button type="submit" class="btn btn-primary bg-success">新規登録</button>-->
-        <%= f.submit "新規登録", class:"btn btn-primary bg-success" %>
-    </p>
-<% end %>
+        <div class="row my-3">
+            <div class="col-12 text-center">
+                <%= f.submit "新規登録", class:"btn btn-success btn-lg px-3" %>
+            </div>
+        </div>
+    <% end %>
+</div>
